@@ -6,7 +6,7 @@
 /*   By: tibarike <tibarike@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 13:20:43 by tibarike          #+#    #+#             */
-/*   Updated: 2024/12/04 17:49:45 by tibarike         ###   ########.fr       */
+/*   Updated: 2024/12/10 19:05:45 by tibarike         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ char	*ft_strjoin(char *s1, char *s2)
 	while (s2[i])
 		str[j++] = s2[i++];
 	str[j] = '\0';
+	free(s1);
 	return (str);
 }
 
