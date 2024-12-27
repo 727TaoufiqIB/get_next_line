@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tibarike <tibarike@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/27 13:20:37 by tibarike          #+#    #+#             */
-/*   Updated: 2024/12/27 16:32:42 by tibarike         ###   ########.fr       */
+/*   Created: 2024/12/12 17:16:29 by tibarike          #+#    #+#             */
+/*   Updated: 2024/12/27 16:28:06 by tibarike         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 static char	*free_buffer(char **buffer)
 {
@@ -72,14 +72,14 @@ static	char	*read_buffer(int fd, char *buff, ssize_t read_b, char *temp)
 		buff = temp;
 	}
 	free(arr);
-	if (!buff || *buff == '\0')
+	if (!buff || !*buff)
 		return (free_buffer(&buff));
 	return (buff);
 }
 
 char	*get_next_line(int fd)
 {
-	static char	*buffer;
+	static char	*buffer[BUFFER_MAX];
 	char		*temporary;
 	ssize_t		read_bytes;
 
@@ -87,6 +87,6 @@ char	*get_next_line(int fd)
 		return (NULL);
 	read_bytes = 0;
 	temporary = NULL;
-	buffer = read_buffer(fd, buffer, read_bytes, temporary);
-	return (extract_line(&buffer));
+	buffer[fd] = read_buffer(fd, buffer[fd], read_bytes, temporary);
+	return (extract_line(&buffer[fd]));
 }
